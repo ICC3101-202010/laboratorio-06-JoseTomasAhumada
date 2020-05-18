@@ -25,6 +25,29 @@ namespace Lab_6
                 company.Add(new Company(name, rut));
                 Save(company);
             }
+            if (option == "si")
+            {
+                try
+                {
+                    company = Load();
+                    Console.WriteLine("El archivo se cargó correctamente.");
+                    Console.WriteLine("NOMBRE RUT");
+                    foreach(Company c in company)
+                    {
+                        Console.WriteLine(c.Name() + " " + c.Rut());
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("No se encontró el archivo solicitado.");
+                    Console.WriteLine("Nombre de la empresa:");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Rut de la empresa (sin punto ni guión):");
+                    string rut = Console.ReadLine();
+                    company.Add(new Company(name, rut));
+                    Save(company);
+                }
+            }
             Console.ReadKey();
         }
         static private void Save(List<Company> company)
@@ -33,6 +56,14 @@ namespace Lab_6
             Stream stream = new FileStream("empresa.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, company);
             stream.Close();
+        }
+        static private List<Company> Load()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("empresa.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            List<Company> company = (List<Company>)formatter.Deserialize(stream);
+            stream.Close();
+            return company;
         }
     }
 }
