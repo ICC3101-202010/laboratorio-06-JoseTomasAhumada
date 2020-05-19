@@ -146,7 +146,7 @@ namespace Lab_6
                             division.ChargePerson();
                             if (division.GetType() == typeof(Block))
                             {
-                                Console.WriteLine("Datos del personal general " + a + ":");
+                                Console.WriteLine("Datos del personal general " + a + " del bloque " + division.Name() + ":");
                                 Console.WriteLine("NOMBRE | APELLIDO | RUT | POSICIÓN");
                                 division.GeneralStaff();
                                 a += 1;
