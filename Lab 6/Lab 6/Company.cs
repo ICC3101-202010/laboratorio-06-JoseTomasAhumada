@@ -12,11 +12,12 @@ namespace Lab_6
     {
         private string name;
         private string rut;
-        private List<Division> l_division;
-        public Company(string name, string rut)
+        private List<Division> divisions;
+        public Company(string name, string rut, List<Division> divisions)
         {
             this.name = name;
             this.rut = rut;
+            this.divisions = divisions;
         }
         public string Name()
         {
@@ -25,6 +26,10 @@ namespace Lab_6
         public string Rut()
         {
             return rut;
+        }
+        public List<Division> Divisions()
+        {
+            return divisions;
         }
     }
 }

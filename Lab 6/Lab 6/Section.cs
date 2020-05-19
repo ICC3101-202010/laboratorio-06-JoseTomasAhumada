@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Lab_6
 {
+    [Serializable]
     public class Section : Division
     {
+        public Section(string name, Person chargePerson) : base(name, chargePerson)
+        {
+            this.name = name;
+            this.chargePerson = chargePerson;
+        }
     }
 }

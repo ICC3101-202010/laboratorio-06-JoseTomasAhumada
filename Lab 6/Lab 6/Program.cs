@@ -18,11 +18,118 @@ namespace Lab_6
             string option = Console.ReadLine();
             if (option == "no")
             {
-                Console.WriteLine("Nombre de la empresa:");
+                Console.WriteLine("\nNombre de la empresa:");
                 string name = Console.ReadLine();
-                Console.WriteLine("Rut de la empresa (sin punto ni guión):");
+                Console.WriteLine("\nRut de la empresa (sin punto ni guión):");
                 string rut = Console.ReadLine();
-                company.Add(new Company(name, rut));
+
+                //Creando departamento.
+                Console.WriteLine("\nNombre del departamento:");
+                string Dname = Console.ReadLine();
+                ////Creando a la persona encargada.
+                Console.WriteLine("\nNombre de la persona encargada:");
+                string PDname = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona encargada:");
+                string PDlastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona encargada:");
+                string PDrut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona encargada:");
+                string PDposition = Console.ReadLine();
+                Person pD = new Person(PDname, PDlastname, PDrut, PDposition);
+                Department d = new Department(Dname, pD);
+
+                //Creando sección.
+                Console.WriteLine("\nNombre de la sección:");
+                string Sname = Console.ReadLine();
+                ////Creando a la persona encargada.
+                Console.WriteLine("\nNombre de la persona encargada:");
+                string PSname = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona encargada:");
+                string PSlastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona encargada:");
+                string PSrut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona encargada:");
+                string PSposition = Console.ReadLine();
+                Person pS = new Person(PSname, PSlastname, PSrut, PSposition);
+                Section s = new Section(Sname, pS);
+
+                //Creando bloque 1.
+                Console.WriteLine("\nNombre del bloque 1:");
+                string Bname = Console.ReadLine();
+                ////Creando a la persona encargada.
+                Console.WriteLine("\nNombre de la persona encargada:");
+                string PBname = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona encargada:");
+                string PBlastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona encargada:");
+                string PBrut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona encargada:");
+                string PBposition = Console.ReadLine();
+                Person pB = new Person(PBname, PBlastname, PBrut, PBposition);
+                ////Creando a la primera persona del personal general.
+                Console.WriteLine("\nNombre de la persona 1:");
+                string PB1name = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona 1:");
+                string PB1lastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona 1:");
+                string PB1rut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona 1:");
+                string PB1position = Console.ReadLine();
+                Person pB1 = new Person(PB1name, PB1lastname, PB1rut, PB1position);
+                ////Creando a la segunda persona del personal general.
+                Console.WriteLine("\nNombre de la persona 2:");
+                string PB2name = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona 2:");
+                string PB2lastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona 2:");
+                string PB2rut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona 2:");
+                string PB2position = Console.ReadLine();
+                Person pB2 = new Person(PB2name, PB2lastname, PB2rut, PB2position);
+                Block b1 = new Block(Bname, pB, pB1, pB2);
+
+                //Creando bloque 2.
+                Console.WriteLine("\nNombre del bloque 2:");
+                string B3name = Console.ReadLine();
+                ////Creando a la persona encargada.
+                Console.WriteLine("\nNombre de la persona encargada:");
+                string PB3name = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona encargada:");
+                string PB3lastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona encargada:");
+                string PB3rut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona encargada:");
+                string PB3position = Console.ReadLine();
+                Person pB3 = new Person(PB3name, PB3lastname, PB3rut, PB3position);
+                ////Creando a la primera persona del personal general.
+                Console.WriteLine("\nNombre de la persona 1:");
+                string PB13name = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona 1:");
+                string PB13lastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona 1:");
+                string PB13rut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona 1:");
+                string PB13position = Console.ReadLine();
+                Person pB13 = new Person(PB13name, PB13lastname, PB13rut, PB13position);
+                ////Creando a la segunda persona del personal general.
+                Console.WriteLine("\nNombre de la persona 2:");
+                string PB23name = Console.ReadLine();
+                Console.WriteLine("\nApellido de la persona 2:");
+                string PB23lastname = Console.ReadLine();
+                Console.WriteLine("\nRUT de la persona 2:");
+                string PB23rut = Console.ReadLine();
+                Console.WriteLine("\nPosición de la persona 2:");
+                string PB23position = Console.ReadLine();
+                Person pB23 = new Person(PB23name, PB23lastname, PB23rut, PB23position);
+                Block b3 = new Block(B3name, pB3, pB13, pB23);
+
+                //agrupando las divisiones de la empresa.
+                List<Division> divisions = new List<Division>();
+                divisions.Add(d);
+                divisions.Add(s);
+                divisions.Add(b1);
+                divisions.Add(b3);
+                company.Add(new Company(name, rut, divisions));
                 Save(company);
             }
             if (option == "si")
@@ -30,21 +137,140 @@ namespace Lab_6
                 try
                 {
                     company = Load();
-                    Console.WriteLine("El archivo se cargó correctamente.");
-                    Console.WriteLine("NOMBRE RUT");
-                    foreach(Company c in company)
+                    Console.WriteLine("\nEl archivo se cargó correctamente.");
+                    foreach (Company c in company)
                     {
-                        Console.WriteLine(c.Name() + " " + c.Rut());
+                        Console.WriteLine("\nNombre de la empresa: " + c.Name());
+                        Console.WriteLine("\nRut de la empresa: " + c.Rut());
+                        foreach (Division division in c.Divisions())
+                        {
+                            Console.WriteLine("\nNombre de la división: " + division.Name());
+                            Console.WriteLine("Datos de la persona encargada.");
+                            Console.WriteLine("NOMBRE | APELLIDO | RUT | POSICIÓN");
+                            division.ChargePerson();
+                            if (division.GetType() == typeof(Block))
+                            {
+                                division.ChargePerson();
+                            }
+                        }
+
                     }
+                    
                 }
                 catch
                 {
                     Console.WriteLine("No se encontró el archivo solicitado.");
-                    Console.WriteLine("Nombre de la empresa:");
+                    Console.WriteLine("\nNombre de la empresa:");
                     string name = Console.ReadLine();
-                    Console.WriteLine("Rut de la empresa (sin punto ni guión):");
+                    Console.WriteLine("\nRut de la empresa (sin punto ni guión):");
                     string rut = Console.ReadLine();
-                    company.Add(new Company(name, rut));
+                    //Creando departamento.
+                    Console.WriteLine("\nNombre del departamento:");
+                    string Dname = Console.ReadLine();
+                    ////Creando a la persona encargada.
+                    Console.WriteLine("\nNombre de la persona encargada:");
+                    string PDname = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona encargada:");
+                    string PDlastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona encargada:");
+                    string PDrut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona encargada:");
+                    string PDposition = Console.ReadLine();
+                    Person pD = new Person(PDname, PDlastname, PDrut, PDposition);
+                    Department d = new Department(Dname, pD);
+
+                    //Creando sección.
+                    Console.WriteLine("\nNombre de la sección:");
+                    string Sname = Console.ReadLine();
+                    ////Creando a la persona encargada.
+                    Console.WriteLine("\nNombre de la persona encargada:");
+                    string PSname = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona encargada:");
+                    string PSlastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona encargada:");
+                    string PSrut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona encargada:");
+                    string PSposition = Console.ReadLine();
+                    Person pS = new Person(PSname, PSlastname, PSrut, PSposition);
+                    Section s = new Section(Sname, pS);
+
+                    //Creando bloque 1.
+                    Console.WriteLine("\nNombre del bloque 1:");
+                    string Bname = Console.ReadLine();
+                    ////Creando a la persona encargada.
+                    Console.WriteLine("\nNombre de la persona encargada:");
+                    string PBname = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona encargada:");
+                    string PBlastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona encargada:");
+                    string PBrut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona encargada:");
+                    string PBposition = Console.ReadLine();
+                    Person pB = new Person(PBname, PBlastname, PBrut, PBposition);
+                    ////Creando a la primera persona del personal general.
+                    Console.WriteLine("\nNombre de la persona 1:");
+                    string PB1name = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona 1:");
+                    string PB1lastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona 1:");
+                    string PB1rut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona 1:");
+                    string PB1position = Console.ReadLine();
+                    Person pB1 = new Person(PB1name, PB1lastname, PB1rut, PB1position);
+                    ////Creando a la segunda persona del personal general.
+                    Console.WriteLine("\nNombre de la persona 2:");
+                    string PB2name = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona 2:");
+                    string PB2lastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona 2:");
+                    string PB2rut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona 2:");
+                    string PB2position = Console.ReadLine();
+                    Person pB2 = new Person(PB2name, PB2lastname, PB2rut, PB2position);
+                    Block b1 = new Block(Bname, pB, pB1, pB2);
+
+                    //Creando bloque 2.
+                    Console.WriteLine("\nNombre del bloque 2:");
+                    string B3name = Console.ReadLine();
+                    ////Creando a la persona encargada.
+                    Console.WriteLine("\nNombre de la persona encargada:");
+                    string PB3name = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona encargada:");
+                    string PB3lastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona encargada:");
+                    string PB3rut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona encargada:");
+                    string PB3position = Console.ReadLine();
+                    Person pB3 = new Person(PB3name, PB3lastname, PB3rut, PB3position);
+                    ////Creando a la primera persona del personal general.
+                    Console.WriteLine("\nNombre de la persona 1:");
+                    string PB13name = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona 1:");
+                    string PB13lastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona 1:");
+                    string PB13rut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona 1:");
+                    string PB13position = Console.ReadLine();
+                    Person pB13 = new Person(PB13name, PB13lastname, PB13rut, PB13position);
+                    ////Creando a la segunda persona del personal general.
+                    Console.WriteLine("\nNombre de la persona 2:");
+                    string PB23name = Console.ReadLine();
+                    Console.WriteLine("\nApellido de la persona 2:");
+                    string PB23lastname = Console.ReadLine();
+                    Console.WriteLine("\nRUT de la persona 2:");
+                    string PB23rut = Console.ReadLine();
+                    Console.WriteLine("\nPosición de la persona 2:");
+                    string PB23position = Console.ReadLine();
+                    Person pB23 = new Person(PB23name, PB23lastname, PB23rut, PB23position);
+                    Block b3 = new Block(B3name, pB3, pB13, pB23);
+
+                    //agrupando las divisiones de la empresa.
+                    List<Division> divisions = new List<Division>();
+                    divisions.Add(d);
+                    divisions.Add(s);
+                    divisions.Add(b1);
+                    divisions.Add(b3);
+                    company.Add(new Company(name, rut, divisions));
                     Save(company);
                 }
             }
