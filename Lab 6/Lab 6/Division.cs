@@ -11,10 +11,12 @@ namespace Lab_6
     {
         protected string name;
         protected Person chargePerson;
-        public Division(string name, Person chargePerson)
+        protected Person generalStaff;
+        public Division(string name, Person chargePerson, Person generalStaff)
         {
             this.name = name;
             this.chargePerson = chargePerson;
+            this.generalStaff = generalStaff;
         }
         public string Name()
         {
@@ -23,6 +25,10 @@ namespace Lab_6
         public void ChargePerson()
         {
             Console.WriteLine(chargePerson.Name() + " " + chargePerson.Lastname() + " " + chargePerson.Rut() + " " + chargePerson.Position());
+        }
+        public void GeneralStaff()
+        {
+            Console.WriteLine(generalStaff.Name() + " " + generalStaff.Lastname() + " " + generalStaff.Rut() + " " + generalStaff.Position());
         }
     }
     

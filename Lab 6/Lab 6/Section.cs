@@ -9,10 +9,11 @@ namespace Lab_6
     [Serializable]
     public class Section : Division
     {
-        public Section(string name, Person chargePerson) : base(name, chargePerson)
+        public Section(string name, Person chargePerson, Person generalStaff) : base(name, chargePerson, generalStaff)
         {
             this.name = name;
             this.chargePerson = chargePerson;
+            this.generalStaff = generalStaff;
         }
     }
 }
